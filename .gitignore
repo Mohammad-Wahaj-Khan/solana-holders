@@ -3,11 +3,4 @@
 /dist
 .DS_Store
 .next
-
-# Generated holder exports can exceed GitHub's file size limit.
-data/*holders*.csv
-data/all_token_holders*.json
-data/all_token_holders*.csv
-data/token_holders*.json
-data/token_holders*.csv
 logs/*.log
