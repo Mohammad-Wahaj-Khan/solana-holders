@@ -1,0 +1,18 @@
+{
+  "name": "solana-holder-fetcher",
+  "version": "1.0.0",
+  "description": "Fetch all token holders in parallel using multiple RPCs",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "export:holders:csv": "node src/exportHoldersCsv.js",
+    "test": "node src/test.js"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.87.6",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.0",
+    "winston": "^3.11.0"
+  }
+}

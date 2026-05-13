@@ -1,0 +1,169 @@
+2026-05-13 00:36:31 [INFO]: Fetching tokens from: http://localhost:8003/tokens?chain=solana 
+2026-05-13 00:36:32 [INFO]: Successfully fetched 100 unique tokens 
+2026-05-13 00:37:04 [INFO]: Step 1: Fetching tokens from API... 
+2026-05-13 00:37:04 [INFO]: Fetching tokens from: http://localhost:8003/tokens?chain=solana 
+2026-05-13 00:37:04 [INFO]: Successfully fetched 100 unique tokens 
+2026-05-13 00:37:04 [INFO]: Step 2: Distributing tokens across RPCs... 
+2026-05-13 00:37:04 [INFO]: Distributed 100 tokens into 20 batches 
+2026-05-13 00:37:04 [INFO]: Using 5 RPC endpoints with 5 tokens per RPC 
+2026-05-13 00:37:04 [INFO]: Step 3: Processing tokens in parallel... 
+2026-05-13 00:37:04 [ERROR]: Fatal error: TokenProcessor is not a constructor 
+2026-05-13 00:45:56 [INFO]: Step 1: Fetching tokens from API... 
+2026-05-13 00:45:56 [INFO]: Fetching tokens from: http://localhost:8003/tokens?chain=solana 
+2026-05-13 00:45:56 [INFO]: Successfully fetched 100 unique tokens 
+2026-05-13 00:45:56 [INFO]: Step 2: Distributing tokens across RPCs... 
+2026-05-13 00:45:56 [INFO]: Distributed 100 tokens into 20 batches 
+2026-05-13 00:45:56 [INFO]: Using 5 RPC endpoints with 5 tokens per RPC 
+2026-05-13 00:45:56 [INFO]: Step 3: Processing tokens in parallel... 
+2026-05-13 00:45:56 [INFO]: [Worker 0] Starting 5 tokens on Helius 1 
+2026-05-13 00:45:56 [INFO]: [Worker 1] Starting 5 tokens on Helius 2 
+2026-05-13 00:45:56 [INFO]: [Worker 2] Starting 5 tokens on Public Solana 
+2026-05-13 00:45:56 [INFO]: [Worker 3] Starting 5 tokens on Triton 
+2026-05-13 00:45:56 [INFO]: [Worker 4] Starting 5 tokens on Helius DAS 
+2026-05-13 00:45:56 [INFO]: [Worker 5] Starting 5 tokens on Helius 1 
+2026-05-13 00:45:56 [INFO]: [Worker 6] Starting 5 tokens on Helius 2 
+2026-05-13 00:45:56 [INFO]: [Worker 7] Starting 5 tokens on Public Solana 
+2026-05-13 00:45:56 [INFO]: [Worker 8] Starting 5 tokens on Triton 
+2026-05-13 00:45:56 [INFO]: [Worker 9] Starting 5 tokens on Helius DAS 
+2026-05-13 00:45:56 [INFO]: [Worker 10] Starting 5 tokens on Helius 1 
+2026-05-13 00:45:56 [INFO]: [Worker 11] Starting 5 tokens on Helius 2 
+2026-05-13 00:45:56 [INFO]: [Worker 12] Starting 5 tokens on Public Solana 
+2026-05-13 00:45:56 [INFO]: [Worker 13] Starting 5 tokens on Triton 
+2026-05-13 00:45:56 [INFO]: [Worker 14] Starting 5 tokens on Helius DAS 
+2026-05-13 00:45:56 [INFO]: [Worker 15] Starting 5 tokens on Helius 1 
+2026-05-13 00:45:56 [INFO]: [Worker 16] Starting 5 tokens on Helius 2 
+2026-05-13 00:45:56 [INFO]: [Worker 17] Starting 5 tokens on Public Solana 
+2026-05-13 00:45:56 [INFO]: [Worker 18] Starting 5 tokens on Triton 
+2026-05-13 00:45:56 [INFO]: [Worker 19] Starting 5 tokens on Helius DAS 
+2026-05-13 00:45:56 [INFO]: Starting 20 parallel workers... 
+2026-05-13 00:45:57 [INFO]: [Worker 2] 88SXkyMXZRRzn2jG4wR3tPPu3TPSRa7P593GmXG4pump: 0 holders 
+2026-05-13 00:45:57 [INFO]: [Worker 7] 7atgF8KQo4wJrD5ATGX7t1V2zVvykPJbFfNeVf1icFv1: 0 holders 
+2026-05-13 00:45:57 [INFO]: [Worker 17] 5gsDMgG3p1xZR7qvbS88EjNSDesBdJjYH7PGemUgpump: 0 holders 
+2026-05-13 00:45:57 [INFO]: [Worker 12] MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5: 0 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 2] DXwcaZ3atb4WfrzDtkR3EcRhkv2rrbzjKLQxyPjNpump: 0 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 3] 3z18KDwzkwGFp63ryhWSK4eP8qkg8PRBtpZiy224pump: 404 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 7] FwZxfG6WHcAAJD5ShYZZQNQCNgtrw2oniQhoDXR5pump: 0 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 5] 6SQgSubdpAXfxaTrsYYoAJMUJLua4C6aGNNMr5C9pump: 668 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 16] NoVpnNV3Mj6ozo6SF2E2DAGkQZ1DmBcsKuSL1xz5a69: 334 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 17] CMx7yon2cLzHcXqgHsKJhuU3MmME6noWLQk2rAycBAGS: 0 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 12] 8NwtzwGm4CV8Hm4fJXR69ac1MxDYuSaN3A9HVyikpump: 0 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 3] B8eDa8cdw94iaKDFJUUkzgqD9XGiryWMFJSzCML6gmKJ: 48 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 2] AUdUEc98MGfEHJiJfCgMaW8gKdcfNDio8BFzGKBwjztC: 0 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 9] FHVnDUfMwkipvnBDpJMoiP4mvnnMVmsCWqAMYGBapump: 369 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 7] 7HgfXftRBBqsYtAEYcqjGLQrNJLL6Tww9ek4rE3Apump: 0 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 12] Aw5SxKyYhXFdZj2BHCqs11UaV5ohwpFQjauB9jFhpump: 0 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 17] HmonqRwasZWGbcpgVLmEGf9TXeypynuLCepV2GPpump: 0 holders 
+2026-05-13 00:45:58 [INFO]: [Worker 10] 2HtyE1W7fE2cdoYxR5fsukr9AyoQGpJep14NAVBMpump: 396 holders 
+2026-05-13 00:45:59 [INFO]: [Worker 2] FhxuJ4YvcfyEBMswyDKquvS1QVDpkPj3VmRJzViKpump: 0 holders 
+2026-05-13 00:45:59 [INFO]: [Worker 8] FeMbDoX7R1Psc4GEcvJdsbNbZA3bfztcyDCatJVJpump: 722 holders 
+2026-05-13 00:45:59 [INFO]: [Worker 7] Do6N8m8ssowyAvXs2tkGKkJ8vaNC8H5oRkMdr9shpump: 0 holders 
+2026-05-13 00:45:59 [INFO]: [Worker 12] GEr3mpSoqQiQsxYKUH8GZqyMConyJSNz3uVRL9bmpump: 0 holders 
+2026-05-13 00:45:59 [INFO]: [Worker 17] 2nnrviYJRLcf2bXAxpKTRXzccoDbwaP4vzuGUG75Jo45: 0 holders 
+2026-05-13 00:45:59 [INFO]: [Worker 2] BrYANThKaAbjZZH5XWLrw26NzMbfUNmBwbZiMe4Fj5Mk: 0 holders 
+2026-05-13 00:45:59 [INFO]: [Worker 2] Finished 5/5 tokens on Public Solana in 3.06s 
+2026-05-13 00:45:59 [INFO]: [Worker 7] 6Bp9LWtyVXcEATi5nuquX5p1hPGUg1cVoUuXGN9Epump: 0 holders 
+2026-05-13 00:45:59 [INFO]: [Worker 7] Finished 5/5 tokens on Public Solana in 3.18s 
+2026-05-13 00:45:59 [INFO]: [Worker 12] 6cNcXWqYvK9nhD1TsjJ1ZH1KATXcaPaRJtZPHyVkJoBs: 0 holders 
+2026-05-13 00:45:59 [INFO]: [Worker 12] Finished 5/5 tokens on Public Solana in 3.29s 
+2026-05-13 00:46:00 [INFO]: [Worker 19] ARea51UmRfn22Ds7KwFZirSMEEn1gtBdrhW4zLeveeV1: 1220 holders 
+2026-05-13 00:46:00 [INFO]: [Worker 17] 4nswj3o1Lo9iWYvvRJxUD8vbCy9ay7QQoXYcncHNbonk: 0 holders 
+2026-05-13 00:46:00 [INFO]: [Worker 17] Finished 5/5 tokens on Public Solana in 3.42s 
+2026-05-13 00:46:00 [INFO]: [Worker 15] 52nVoVk3BimAtvu2y9q1gnxqgR8pmjcc3v3byGnCuBa: 1278 holders 
+2026-05-13 00:46:00 [INFO]: [Worker 19] 8qWfvsQ2bjAoffsqmnzQ1rY6ui89Wjfv9AkeUmN5pump: 186 holders 
+2026-05-13 00:46:00 [INFO]: [Worker 9] GP7m3USdHDSrNoUzsZqZTboKaJiabFQShzgV2RkFnZyh: 886 holders 
+2026-05-13 00:46:00 [INFO]: [Worker 13] DFzeUzRnzbaVDziEhx8THxDD71GnBSpqUkuUnN2Qpump: 1286 holders 
+2026-05-13 00:46:01 [INFO]: [Worker 5] 6qdzMx4c9rL2X3Ns3SwZ8uEo4zReDPjdXpAEmpo7pump: 3924 holders 
+2026-05-13 00:46:01 [INFO]: [Worker 14] AGBegePeNtnBy1xLGBDcBDjxaVHaDhvebSNMduLapump: 1565 holders 
+2026-05-13 00:46:01 [INFO]: [Worker 5] HjTJfc7oxjF56cVkm5HgsF4x4Qv9eJSpHmvq5jmqpump: 145 holders 
+2026-05-13 00:46:02 [INFO]: [Worker 11] 5EpbKX221NYVidK6A2nJGhtuLPvrPiQ6shknLbtjBAGS: 1000 holders 
+2026-05-13 00:46:02 [INFO]: [Worker 5] GozPNCAseytzxCR3d2k8hTsTYkr4SDpuXy2RQAZFVx2g: 67 holders 
+2026-05-13 00:46:03 [INFO]: [Worker 14] HDG8Ng6YLpiYXzBASD1Zd5Wh7T8DHRYFcbf4YGuvpump: 1400 holders 
+2026-05-13 00:46:03 [INFO]: [Worker 11] HcrWkcgVMuS9D6vS6WfjynKuH7ud4ZykB7ASq2dyN4ks: 730 holders 
+2026-05-13 00:46:10 [INFO]: [Worker 8] 3yr17ZEE6wvCG7e3qD51XsfeSoSSKuCKptVissoopump: 3200 holders 
+2026-05-13 00:46:10 [INFO]: [Worker 14] r4QvQGZbKHc4bLxGP6SueRyYDzuvMVdTqXeuWSipump: 1091 holders 
+2026-05-13 00:46:11 [INFO]: [Worker 0] x95HN3DWvbfCBtTjGm587z8suK3ec6cwQwgZNLbWKyp: 10000 holders 
+2026-05-13 00:46:12 [INFO]: [Worker 9] 2tXpgu2DLTsPUf9zFmuZmA4xrYxXKBTpVq9wAM7hzs9y: 10000 holders 
+2026-05-13 00:46:14 [INFO]: [Worker 8] TVKv96p5SD93veeWTZzppv17r867ij6tmnDpUhZpump: 1476 holders 
+2026-05-13 00:46:15 [ERROR]: [Helius DAS] Failed to fetch holders for 8Jx8AAHj86wbQgUTjGuj6GTTL5Ps3cqxKRTvpaJApump: aborted 
+2026-05-13 00:46:15 [WARN]: [Worker 19] Retrying 8Jx8AAHj86wbQgUTjGuj6GTTL5Ps3cqxKRTvpaJApump after attempt 1: aborted 
+2026-05-13 00:46:16 [INFO]: [Worker 16] Ffs23XgzXViCtB4Hhb9K1tHMi42RDbaaN8xVvP7YCggm: 2669 holders 
+2026-05-13 00:46:17 [INFO]: [Worker 16] 4AjvPXMn8YZG9saAVJvcWspg73oTFf2JmU4in4Xgpump: 1117 holders 
+2026-05-13 00:46:17 [INFO]: [Worker 14] Gc5hxBYZjxWNpt3B8XYbp4YoGCHSMfrJK7ex4GUTpump: 1571 holders 
+2026-05-13 00:46:18 [INFO]: [Worker 1] X69GKB2fLN8tSUxNTMneGAQw79qDw9KcPQp3RoAk9cf: 10000 holders 
+2026-05-13 00:46:20 [INFO]: [Worker 10] ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82: 10000 holders 
+2026-05-13 00:46:20 [INFO]: [Worker 16] 5gTPspC2ricuGWiYQ4Ghausg8fsq7uCrGgSVACatcoin: 3117 holders 
+2026-05-13 00:46:22 [INFO]: [Worker 15] CAjtTHvC878f8cZ4zEwdvgjkjFM7rbYN8Mb1go1cpump: 10000 holders 
+2026-05-13 00:46:23 [INFO]: [Worker 14] 5T17aqgJ8cM39SNuVBu2LK2cq5MWUpZxcQnnuwNjpump: 1627 holders 
+2026-05-13 00:46:23 [INFO]: [Worker 14] Finished 5/5 tokens on Helius DAS in 26.56s 
+2026-05-13 00:46:23 [INFO]: [Worker 6] 3joMReCCSESngJEpFLoKR2dNcChjSRCDtybQet5uSpse: 7636 holders 
+2026-05-13 00:46:24 [INFO]: [Worker 15] DJGAdx7X6YiVk9anFbVAqgJtLjiNEeqAksn6WCQ9BAGS: 531 holders 
+2026-05-13 00:46:24 [INFO]: [Worker 15] 7BC22ppHGeCdhpxNVyJMxV51y1qzkAcEd8YXtzX8pump: 748 holders 
+2026-05-13 00:46:25 [INFO]: [Worker 13] HD3JBABeFkdZwUgKwhwJYqjLNrPWXEaDVfH4uMqRpump: 6714 holders 
+2026-05-13 00:46:26 [INFO]: [Worker 11] DjgujfEv2u2qz7PNuS6Ct7bctnxPFihfWE2zBpKZpump: 5546 holders 
+2026-05-13 00:46:27 [INFO]: [Worker 16] Fh5fNaGMHQfencSGj83kyp26RrB3fCoYtYuLvXaRpump: 952 holders 
+2026-05-13 00:46:27 [INFO]: [Worker 16] Finished 5/5 tokens on Helius 2 in 31.02s 
+2026-05-13 00:46:28 [INFO]: [Worker 11] DFG1vP6wKBmxpbcaKesbV3mHoj6Jz6tNEjqy8DwRpump: 503 holders 
+2026-05-13 00:46:28 [INFO]: [Worker 5] 6AVAUKa9uxQpruHZUinFECpXEh1usRVtzQWK8N2wpump: 8371 holders 
+2026-05-13 00:46:28 [INFO]: [Worker 5] Finished 5/5 tokens on Helius 1 in 31.64s 
+2026-05-13 00:46:28 [INFO]: [Worker 18] HBoNJ5v8g71s2boRivrHnfSB5MVPLDHHyVjruPfhGkvL: 10000 holders 
+2026-05-13 00:46:29 [INFO]: [Worker 18] 6SjVTj1VGwFSXn7wEjwFm77LvACeTqB7sQUebYKX8Ds5: 343 holders 
+2026-05-13 00:46:31 [INFO]: [Worker 13] HWMYPcKxRoSHyBGEA5SZfFpDkKWBeiXwx2PYoxTTbonk: 560 holders 
+2026-05-13 00:46:32 [INFO]: [Worker 18] 865GVDdESzXiNvygSUt7yFeJLrXDyn5UpGNfYuxfpump: 630 holders 
+2026-05-13 00:46:33 [INFO]: [Worker 3] 85cQsFgbi8mBZxiPppbpPXuV7j1hA8tBwhjF4gKW6mHg: 10000 holders 
+2026-05-13 00:46:33 [INFO]: [Worker 19] 8Jx8AAHj86wbQgUTjGuj6GTTL5Ps3cqxKRTvpaJApump succeeded on attempt 2 
+2026-05-13 00:46:33 [INFO]: [Worker 19] 8Jx8AAHj86wbQgUTjGuj6GTTL5Ps3cqxKRTvpaJApump: 10000 holders 
+2026-05-13 00:46:33 [INFO]: [Worker 1] 3JgFwoYV74f6LwWjQWnr3YDPFnmBdwQfNyubv99jqUoq: 6728 holders 
+2026-05-13 00:46:34 [INFO]: [Worker 4] 73xsLcBnLnc9bh81cqVKqj8uEyiarXng5ZwJuTbnVebG: 10000 holders 
+2026-05-13 00:46:35 [INFO]: [Worker 10] 347k5f1WLRYe81roRcLBWDR6k3eCRunaqetQPW6pbonk: 4729 holders 
+2026-05-13 00:46:36 [INFO]: [Worker 15] EwEJ5R1im54MowvsGwYUkyfWRMV1qcRL21PumVd4pump: 3565 holders 
+2026-05-13 00:46:36 [INFO]: [Worker 15] Finished 5/5 tokens on Helius 1 in 39.45s 
+2026-05-13 00:46:37 [INFO]: [Worker 18] 739dnZEG4yaBWFsY8L8ZwrfhGG6dhtCSercW8Umspump: 1151 holders 
+2026-05-13 00:46:39 [INFO]: [Worker 13] E9pBR4xjscYLPqFZ4YM4gUkczqz7MHpB6dk4sfSQTnJD: 1005 holders 
+2026-05-13 00:46:43 [INFO]: [Worker 19] 87B6mb9KBjaF5NHrB3H33f7grdUHi4oWmMErjhZ5bonk: 1107 holders 
+2026-05-13 00:46:43 [INFO]: [Worker 10] 2LzLh5pHg3nDQz6goTLAvDXfDbSBgAR8qem3bdXdpump: 1436 holders 
+2026-05-13 00:46:43 [INFO]: [Worker 8] pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn: 10000 holders 
+2026-05-13 00:46:46 [INFO]: [Worker 13] 2PzS5SYYWjUFvzXNFaMmRkpjkxGX6R5v8DnKYtdcpump: 2351 holders 
+2026-05-13 00:46:46 [INFO]: [Worker 13] Finished 5/5 tokens on Triton in 49.71s 
+2026-05-13 00:46:48 [INFO]: [Worker 0] 7hWcHohzwtLddDUG81H2PkWq6KEkMtSDNkYXsso18Fy3: 10000 holders 
+2026-05-13 00:46:48 [INFO]: [Worker 1] madHpjRn6bd8t78Rsy7NuSuNwWa2HU8ByPobZprHbHv: 10000 holders 
+2026-05-13 00:46:48 [INFO]: [Worker 4] CmgJ1PobhUqB7MEa8qDkiG2TUpMTskWj8d9JeZWSpump: 7368 holders 
+2026-05-13 00:46:48 [INFO]: [Worker 11] GASfLqDbE8c9w8mjKknxaHeDMmdy9usGwM1GwzVJpump: 5418 holders 
+2026-05-13 00:46:48 [INFO]: [Worker 11] Finished 5/5 tokens on Helius 2 in 52.23s 
+2026-05-13 00:46:51 [INFO]: [Worker 9] 8wXtPeU6557ETkp9WHFY1n1EcU6NxDvbAggHGsMYiHsB: 10000 holders 
+2026-05-13 00:46:53 [INFO]: [Worker 6] AujTJJ7aMS8LDo3bFzoyXDwT3jBALUbu4VZhzZdTZLmG: 10000 holders 
+2026-05-13 00:46:55 [INFO]: [Worker 8] 7sGdNQSvUGpahh6qyXB3g5gsdK9FAzZM299KyCXspump: 3328 holders 
+2026-05-13 00:46:55 [INFO]: [Worker 8] Finished 5/5 tokens on Triton in 58.61s 
+2026-05-13 00:46:57 [INFO]: [Worker 18] UwU8RVXB69Y6Dcju6cN2Qef6fykkq6UUNpB15rZku6Z: 5654 holders 
+2026-05-13 00:46:57 [INFO]: [Worker 18] Finished 5/5 tokens on Triton in 60.55s 
+2026-05-13 00:46:59 [INFO]: [Worker 3] 69kdRLyP5DTRkpHraaSZAQbWmAwzF9guKjZfzMXzcbAs: 10000 holders 
+2026-05-13 00:47:00 [INFO]: [Worker 3] AfV8U7ZSbdg4ZM5xZ2P9vbrfX3NmEBSDYNNuBriQpump: 599 holders 
+2026-05-13 00:47:00 [INFO]: [Worker 3] Finished 5/5 tokens on Triton in 63.41s 
+2026-05-13 00:47:02 [INFO]: [Worker 6] 9KbgSh6XZaHiDBQE26tGTDuJuUZmVyvJGGabrE7fpump: 3223 holders 
+2026-05-13 00:47:03 [INFO]: [Worker 0] FViMp5phQH2bX81S7Yyn1yXjj3BRddFBNcMCbTH8FCze: 10000 holders 
+2026-05-13 00:47:03 [INFO]: [Worker 6] GuWqNuKbaG1m84SbXBXBy9wmuepk5s7kYXRAkMeypump: 569 holders 
+2026-05-13 00:47:06 [INFO]: [Worker 10] 63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9: 10000 holders 
+2026-05-13 00:47:06 [INFO]: [Worker 10] Finished 5/5 tokens on Helius 1 in 70.07s 
+2026-05-13 00:47:12 [INFO]: [Worker 1] 5LafQUrVco6o7KMz42eqVEJ9LW31StPyGjeeu5sKoMtA: 10000 holders 
+2026-05-13 00:47:14 [INFO]: [Worker 0] Doggoyb1uHFJGFdHhJf8FKEBUMv58qo98CisWgeD7Ftk: 10000 holders 
+2026-05-13 00:47:14 [INFO]: [Worker 4] GinNabffZL4fUj9Vactxha74GDAW8kDPGaHqMtMzps2f: 10000 holders 
+2026-05-13 00:47:16 [INFO]: [Worker 9] 61Wj56QgGyyB966T7YsMzEAKRLcMvJpDbPzjkrCZc4Bi: 9126 holders 
+2026-05-13 00:47:16 [INFO]: [Worker 9] Finished 5/5 tokens on Helius DAS in 80.18s 
+2026-05-13 00:47:19 [INFO]: [Worker 19] JxxWsvm9jHt4ah7DT9NuLyVLYZcZLUdPD93PcPQ71Ka: 10000 holders 
+2026-05-13 00:47:19 [INFO]: [Worker 19] Finished 5/5 tokens on Helius DAS in 83.29s 
+2026-05-13 00:47:22 [INFO]: [Worker 0] 8FA3TPf84h9gEZAxDhiLkMN4vvZcdEUZxmGadbo12auh: 3796 holders 
+2026-05-13 00:47:22 [INFO]: [Worker 0] Finished 5/5 tokens on Helius 1 in 85.68s 
+2026-05-13 00:47:26 [INFO]: [Worker 1] DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263: 10000 holders 
+2026-05-13 00:47:26 [INFO]: [Worker 1] Finished 5/5 tokens on Helius 2 in 90.11s 
+2026-05-13 00:47:30 [INFO]: [Worker 4] FbmmdcCYHL7WETG89xtWmNFMzQAaQ8Zs9NXVbimibonk: 8253 holders 
+2026-05-13 00:47:33 [INFO]: [Worker 4] J3Ba2XtKqxjp5AzHryj3Guax6pd5NFwoSUqs4dkipump: 1182 holders 
+2026-05-13 00:47:33 [INFO]: [Worker 4] Finished 5/5 tokens on Helius DAS in 96.43s 
+2026-05-13 00:47:34 [INFO]: [Worker 6] EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v: 10000 holders 
+2026-05-13 00:47:34 [INFO]: [Worker 6] Finished 5/5 tokens on Helius 2 in 97.59s 
+2026-05-13 00:47:34 [INFO]: Step 4: Saving results... 
+2026-05-13 00:47:35 [INFO]: Detailed results saved to data\holders_2026-05-12T19-47-34.187Z.json 
+2026-05-13 00:47:35 [INFO]: Summary saved to data\summary_2026-05-12T19-47-34.187Z.json 
+2026-05-13 00:47:36 [INFO]: All holders data saved to data\holders_2026-05-12T19-47-34.187Z_all.json 
+2026-05-13 20:03:49 [INFO]: Step 1: Fetching tokens from API... 
+2026-05-13 20:03:49 [INFO]: Fetching tokens from: http://localhost:8003/tokens?chain=solana 
+2026-05-13 20:03:49 [ERROR]: Failed to fetch tokens:  
+2026-05-13 20:03:49 [ERROR]: Fatal error:  
