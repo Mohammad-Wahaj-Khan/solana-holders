@@ -18,6 +18,16 @@ module.exports = {
             type: 'rpc'
         },
         {
+            name: 'Helius 3',
+            url: process.env.HELIUS_RPC_3 || 'https://mainnet.helius-rpc.com/?api-key=YOUR_KEY',
+            type: 'rpc'
+        },
+        {
+            name: 'Helius 4',
+            url: process.env.HELIUS_RPC_4 || 'https://mainnet.helius-rpc.com/?api-key=YOUR_KEY',
+            type: 'rpc'
+        },
+        {
             name: 'Public Solana',
             url: 'https://api.mainnet-beta.solana.com',
             type: 'rpc'
@@ -61,7 +71,7 @@ module.exports = {
 };
 
 // Validate required environment variables
-const requiredEnvVars = ['HELIUS_RPC_1'];
+const requiredEnvVars = ['HELIUS_RPC_1', 'HELIUS_RPC_2', 'HELIUS_RPC_3', 'HELIUS_RPC_4', 'HELIUS_DAS'];
 const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
 
 if (missingVars.length > 0) {
