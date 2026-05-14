@@ -10,7 +10,7 @@ const RateLimiter = require('./services/rateLimiter');
 
 const TOKEN_PROGRAM_ID = 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA';
 const PAGE_SIZE = Number(process.env.HOLDER_PAGE_SIZE || config.holderPageSize || 1000);
-const CONCURRENCY = Number(process.env.HOLDER_EXPORT_CONCURRENCY || 3);
+const CONCURRENCY = Number(process.env.HOLDER_EXPORT_CONCURRENCY || config.holderExportConcurrency || 50);
 const TOKEN_LIMIT = Number(process.env.TOKEN_LIMIT || 0);
 const MAX_HOLDERS_PER_TOKEN = Number(process.env.MAX_HOLDERS_PER_TOKEN || 0);
 const STABLE_BASENAME = process.env.HOLDER_EXPORT_BASENAME || 'all_token_holders';
