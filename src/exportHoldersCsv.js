@@ -15,6 +15,50 @@ const TOKEN_LIMIT = Number(process.env.TOKEN_LIMIT || 0);
 const MAX_HOLDERS_PER_TOKEN = Number(process.env.MAX_HOLDERS_PER_TOKEN || 0);
 const STABLE_BASENAME = process.env.HOLDER_EXPORT_BASENAME || 'all_token_holders';
 
+const HOLDER_HEADERS = [
+    'mint',
+    'symbol',
+    'name',
+    'decimals',
+    'owner',
+    'token_accounts',
+    'raw_balance_sum',
+    'holder_row_key',
+    'rpc_used',
+    'source_file',
+    'snapshot_started_at',
+    'snapshot_completed_at',
+    'snapshot_slot_before',
+    'snapshot_slot_after'
+];
+
+const SUMMARY_HEADERS = [
+    'mint',
+    'symbol',
+    'name',
+    'decimals',
+    'holder_row_count',
+    'token_account_count',
+    'rpc_used',
+    'status',
+    'error',
+    'source_file',
+    'snapshot_started_at',
+    'snapshot_completed_at',
+    'snapshot_slot_before',
+    'snapshot_slot_after',
+    'snapshot_rpc'
+];
+
+const ERROR_HEADERS = [
+    'mint',
+    'symbol',
+    'name',
+    'rpc_used',
+    'error',
+    'source_file'
+];
+
 function outputFiles() {
     return {
         holders: path.join(config.outputDir, `${STABLE_BASENAME}.csv`),
@@ -85,6 +129,36 @@ function csvEscape(value) {
 
 function csvRow(values) {
     return `${values.map(csvEscape).join(',')}\n`;
+}
+
+function headerMatches(file, expectedHeaders) {
+    if (!fs.existsSync(file)) return true;
+
+    const fd = fs.openSync(file, 'r');
+    try {
+        const buffer = Buffer.alloc(4096);
+        const bytesRead = fs.readSync(fd, buffer, 0, buffer.length, 0);
+        const firstLine = buffer.toString('utf8', 0, bytesRead).split(/\r?\n/)[0] || '';
+        const headers = parseCsvLine(firstLine);
+        return headers.join(',') === expectedHeaders.join(',');
+    } finally {
+        fs.closeSync(fd);
+    }
+}
+
+function assertCompatibleCsv(file, expectedHeaders) {
+    if (!headerMatches(file, expectedHeaders)) {
+        throw new Error(
+            `${file} uses an older CSV schema. Use a fresh HOLDER_EXPORT_BASENAME, ` +
+            'or move the old output before rerunning the snapshot exporter.'
+        );
+    }
+}
+
+function writeJsonAtomic(file, data) {
+    const tempFile = `${file}.tmp`;
+    fs.writeFileSync(tempFile, JSON.stringify(data, null, 2), 'utf8');
+    fs.renameSync(tempFile, file);
 }
 
 function errorMessage(error) {
@@ -193,7 +267,7 @@ async function readTokens(inputFiles) {
 }
 
 function readCompletedMints(summaryFile) {
-    const completed = new Set();
+    const completed = new Map();
     const stats = {
         processedTokens: 0,
         successfulTokens: 0,
@@ -205,19 +279,41 @@ function readCompletedMints(summaryFile) {
         return { completed, stats };
     }
 
+    assertCompatibleCsv(summaryFile, SUMMARY_HEADERS);
+
     const lines = fs.readFileSync(summaryFile, 'utf8')
         .split(/\r?\n/)
         .filter(line => line.trim());
 
+    const headers = parseCsvLine(lines[0]);
+
     for (const line of lines.slice(1)) {
         const fields = parseCsvLine(line);
-        const mint = fields[0];
-        const holderRows = Number(fields[4] || 0);
-        const status = fields[7] || '';
+        const row = {};
+        headers.forEach((header, index) => {
+            row[header] = fields[index] || '';
+        });
+
+        const mint = row.mint;
+        const holderRows = Number(row.holder_row_count || 0);
+        const tokenAccounts = Number(row.token_account_count || 0);
+        const status = row.status || '';
 
         if (!mint || completed.has(mint)) continue;
 
-        completed.add(mint);
+        completed.set(mint, {
+            mint,
+            status,
+            holder_row_count: Number.isFinite(holderRows) ? holderRows : 0,
+            token_account_count: Number.isFinite(tokenAccounts) ? tokenAccounts : 0,
+            snapshot_started_at: row.snapshot_started_at || '',
+            snapshot_completed_at: row.snapshot_completed_at || '',
+            snapshot_slot_before: row.snapshot_slot_before || '',
+            snapshot_slot_after: row.snapshot_slot_after || '',
+            rpc_used: row.rpc_used || '',
+            snapshot_rpc: row.snapshot_rpc || '',
+            error: row.error || ''
+        });
         stats.processedTokens++;
         stats.totalHolderRows += Number.isFinite(holderRows) ? holderRows : 0;
 
@@ -234,7 +330,7 @@ class CsvHolderExporter {
         this.files = outputFiles();
         this.endpoints = config.rpcEndpoints.filter(endpoint => endpoint.url && !endpoint.url.includes('YOUR_KEY'));
         this.rateLimiters = new Map();
-        this.completed = new Set();
+        this.completed = new Map();
         this.stats = {
             startedAt: new Date().toISOString(),
             inputFiles: this.inputFiles,
@@ -250,6 +346,7 @@ class CsvHolderExporter {
             successfulTokens: 0,
             failedTokens: 0,
             totalHolderRows: 0,
+            completedTokenSnapshots: {},
             currentStateOnly: true,
             note: 'RPC/DAS token account queries return current holders, not every historical wallet that ever held a token.'
         };
@@ -257,55 +354,29 @@ class CsvHolderExporter {
 
     ensureOutputFiles() {
         fs.mkdirSync(config.outputDir, { recursive: true });
+        assertCompatibleCsv(this.files.holders, HOLDER_HEADERS);
+        assertCompatibleCsv(this.files.summary, SUMMARY_HEADERS);
+        assertCompatibleCsv(this.files.errors, ERROR_HEADERS);
 
         if (!fs.existsSync(this.files.holders)) {
-            fs.writeFileSync(this.files.holders, csvRow([
-                'mint',
-                'symbol',
-                'name',
-                'decimals',
-                'owner',
-                'token_accounts',
-                'raw_balance_sum',
-                'holder_row_key',
-                'rpc_used',
-                'source_file'
-            ]), 'utf8');
+            fs.writeFileSync(this.files.holders, csvRow(HOLDER_HEADERS), 'utf8');
         }
 
         if (!fs.existsSync(this.files.summary)) {
-            fs.writeFileSync(this.files.summary, csvRow([
-                'mint',
-                'symbol',
-                'name',
-                'decimals',
-                'holder_row_count',
-                'token_account_count',
-                'rpc_used',
-                'status',
-                'error',
-                'source_file'
-            ]), 'utf8');
+            fs.writeFileSync(this.files.summary, csvRow(SUMMARY_HEADERS), 'utf8');
         }
 
         if (!fs.existsSync(this.files.errors)) {
-            fs.writeFileSync(this.files.errors, csvRow([
-                'mint',
-                'symbol',
-                'name',
-                'rpc_used',
-                'error',
-                'source_file'
-            ]), 'utf8');
+            fs.writeFileSync(this.files.errors, csvRow(ERROR_HEADERS), 'utf8');
         }
     }
 
     writeCheckpoint(extra = {}) {
-        fs.writeFileSync(this.files.checkpoint, JSON.stringify({
+        writeJsonAtomic(this.files.checkpoint, {
             ...this.stats,
             ...extra,
             updatedAt: new Date().toISOString()
-        }, null, 2));
+        });
     }
 
     getEndpoint(index) {
@@ -334,16 +405,19 @@ class CsvHolderExporter {
         return response.data;
     }
 
-    async getSlot() {
+    async getSlot(preferredEndpoint = null) {
         let lastError = null;
+        const endpoints = preferredEndpoint
+            ? [preferredEndpoint, ...this.endpoints.filter(endpoint => endpoint.url !== preferredEndpoint.url)]
+            : this.endpoints;
 
-        for (const endpoint of this.endpoints) {
+        for (const endpoint of endpoints) {
             try {
                 const response = await this.rpc(endpoint, {
                     jsonrpc: '2.0',
                     id: 'slot-watermark',
                     method: 'getSlot',
-                    params: [{ commitment: 'confirmed' }]
+                    params: [{ commitment: 'finalized' }]
                 }, 15000);
                 return { slot: response.result, rpcName: endpoint.name };
             } catch (error) {
@@ -438,10 +512,29 @@ class CsvHolderExporter {
     async processToken(token, index) {
         const endpoint = this.getEndpoint(index);
         const mint = token.mint;
+        const snapshot = {
+            snapshot_started_at: '',
+            snapshot_completed_at: '',
+            snapshot_slot_before: '',
+            snapshot_slot_after: '',
+            snapshot_rpc: ''
+        };
 
         try {
+            const beforeSlot = await this.getSlot(endpoint);
+            snapshot.snapshot_started_at = new Date().toISOString();
+            snapshot.snapshot_slot_before = beforeSlot.slot;
+
             const tokenAccounts = await this.fetchTokenAccounts(token, endpoint);
             const holders = aggregateHoldersByOwner(tokenAccounts);
+
+            const afterSlot = await this.getSlot(endpoint);
+            snapshot.snapshot_completed_at = new Date().toISOString();
+            snapshot.snapshot_slot_after = afterSlot.slot;
+            snapshot.snapshot_rpc = beforeSlot.rpcName === afterSlot.rpcName
+                ? beforeSlot.rpcName
+                : `${beforeSlot.rpcName}|${afterSlot.rpcName}`;
+
             const holderRows = holders.map(holder => csvRow([
                 mint,
                 token.symbol,
@@ -452,7 +545,11 @@ class CsvHolderExporter {
                 holder.amount,
                 `${mint}:${holder.owner}`,
                 endpoint.name,
-                token.sourceFile
+                token.sourceFile,
+                snapshot.snapshot_started_at,
+                snapshot.snapshot_completed_at,
+                snapshot.snapshot_slot_before,
+                snapshot.snapshot_slot_after
             ])).join('');
 
             if (holderRows) {
@@ -469,15 +566,42 @@ class CsvHolderExporter {
                 endpoint.name,
                 'success',
                 '',
-                token.sourceFile
+                token.sourceFile,
+                snapshot.snapshot_started_at,
+                snapshot.snapshot_completed_at,
+                snapshot.snapshot_slot_before,
+                snapshot.snapshot_slot_after,
+                snapshot.snapshot_rpc
             ]), 'utf8');
 
-            this.completed.add(mint);
+            this.recordCompletedToken({
+                mint,
+                status: 'success',
+                holder_row_count: holders.length,
+                token_account_count: tokenAccounts.length,
+                snapshot_started_at: snapshot.snapshot_started_at,
+                snapshot_completed_at: snapshot.snapshot_completed_at,
+                snapshot_slot_before: snapshot.snapshot_slot_before,
+                snapshot_slot_after: snapshot.snapshot_slot_after,
+                rpc_used: endpoint.name,
+                snapshot_rpc: snapshot.snapshot_rpc,
+                error: ''
+            });
             this.stats.successfulTokens++;
             this.stats.totalHolderRows += holders.length;
             return { success: true };
         } catch (error) {
             const message = errorMessage(error);
+            if (snapshot.snapshot_started_at && !snapshot.snapshot_completed_at) {
+                try {
+                    const afterSlot = await this.getSlot(endpoint);
+                    snapshot.snapshot_completed_at = new Date().toISOString();
+                    snapshot.snapshot_slot_after = afterSlot.slot;
+                    snapshot.snapshot_rpc = snapshot.snapshot_rpc || afterSlot.rpcName;
+                } catch {
+                    snapshot.snapshot_completed_at = new Date().toISOString();
+                }
+            }
             fs.appendFileSync(this.files.errors, csvRow([
                 mint,
                 token.symbol,
@@ -496,10 +620,27 @@ class CsvHolderExporter {
                 endpoint.name,
                 'failed',
                 message,
-                token.sourceFile
+                token.sourceFile,
+                snapshot.snapshot_started_at,
+                snapshot.snapshot_completed_at,
+                snapshot.snapshot_slot_before,
+                snapshot.snapshot_slot_after,
+                snapshot.snapshot_rpc
             ]), 'utf8');
 
-            this.completed.add(mint);
+            this.recordCompletedToken({
+                mint,
+                status: 'failed',
+                holder_row_count: 0,
+                token_account_count: 0,
+                snapshot_started_at: snapshot.snapshot_started_at,
+                snapshot_completed_at: snapshot.snapshot_completed_at,
+                snapshot_slot_before: snapshot.snapshot_slot_before,
+                snapshot_slot_after: snapshot.snapshot_slot_after,
+                rpc_used: endpoint.name,
+                snapshot_rpc: snapshot.snapshot_rpc,
+                error: message
+            });
             this.stats.failedTokens++;
             return { success: false };
         } finally {
@@ -516,6 +657,11 @@ class CsvHolderExporter {
         }
     }
 
+    recordCompletedToken(record) {
+        this.completed.set(record.mint, record);
+        this.stats.completedTokenSnapshots[record.mint] = record;
+    }
+
     async run() {
         if (this.endpoints.length === 0) {
             throw new Error('No usable RPC endpoints configured. Add RPC URLs to .env.');
@@ -529,6 +675,7 @@ class CsvHolderExporter {
 
         const resume = readCompletedMints(this.files.summary);
         this.completed = resume.completed;
+        this.stats.completedTokenSnapshots = Object.fromEntries(this.completed);
         this.stats.successfulTokens = resume.stats.successfulTokens;
         this.stats.failedTokens = resume.stats.failedTokens;
         this.stats.totalHolderRows = resume.stats.totalHolderRows;
@@ -551,7 +698,7 @@ class CsvHolderExporter {
         if (remaining.length === 0) {
             this.stats.completedAt = new Date().toISOString();
             this.writeCheckpoint();
-            fs.writeFileSync(this.files.manifest, JSON.stringify(this.stats, null, 2));
+            writeJsonAtomic(this.files.manifest, this.stats);
             console.log('No remaining mints to process. Stable files are already up to date.');
             return;
         }
@@ -576,7 +723,7 @@ class CsvHolderExporter {
         this.stats.latestFetchedSlot = endSlot.slot;
         this.stats.latestFetchedSlotRpc = endSlot.rpcName;
         this.writeCheckpoint({ latestFetchedSlot: endSlot.slot });
-        fs.writeFileSync(this.files.manifest, JSON.stringify(this.stats, null, 2));
+        writeJsonAtomic(this.files.manifest, this.stats);
 
         console.log(`Holder CSV: ${this.files.holders}`);
         console.log(`Summary CSV: ${this.files.summary}`);
